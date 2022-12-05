@@ -107,7 +107,8 @@ function ProductScreen() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Status: $</Col>
+                    <Col>Status:
+                     $</Col>
                     <Col>
                       {product.countInStock > 0 ? (
                         <Badge bg="success">In Stock</Badge>

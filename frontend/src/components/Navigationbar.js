@@ -28,9 +28,9 @@ function Navigationbar() {
             <Link to="/outfits" className="nav-link">
               Outfits
             </Link>
-            {/* <Link to="/sports" className="nav-link">
+            <Link to="/sports" className="nav-link">
               Sports
-            </Link> */}
+            </Link>
           </Nav>
           <Nav>
             <Link to="/cart" className="nav-link">

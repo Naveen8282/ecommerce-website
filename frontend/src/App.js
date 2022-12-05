@@ -7,7 +7,7 @@ import CartScreen from "./screens/CartScreen";
 import Outfits from "./products/Outfits";
 import Navigationbar from "./components/Navigationbar";
 import Electronics from "./products/Electronics";
-// import Sports from "./products/Sports";
+import Sports from "./products/Sports";
 
 function App() {
    return (
@@ -24,7 +24,7 @@ function App() {
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/outfits" element={<Outfits />} />
-              {/* <Route path="/sports" element={<Sports />} /> */}
+              <Route path="/sports" element={<Sports />} />
               <Route path="/electronics" element={<Electronics />} />
             </Routes>
           </Container>

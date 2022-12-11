@@ -9,6 +9,8 @@ import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import { Helmet } from "react-helmet-async";
 import { Store } from "../Store";
+import Loading from "../components/Loading";
+import { getError } from "../components/Utils";
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -39,7 +41,8 @@ function ProductScreen() {
         const result = await axios.get(`/api/products/slug/${slug}`);
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
+        dispatch({ type: "FETCH_FAIL", payload: getError(err) });
+        // dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
 
       // setProducts(result.data);
@@ -68,12 +71,12 @@ function ProductScreen() {
   };
 
   return loading ? (
-    <div>Loading...</div>
+    <Loading></Loading>
   ) : error ? (
     <div>{error}</div>
   ) : (
     <div>
-      <Row>
+      <Row >
         <Col md={6} >
           <img
             className="img-large" 
@@ -85,7 +88,7 @@ function ProductScreen() {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <Helmet>
-                <title>{product.name}</title>
+                <title>{product._id}</title>
               </Helmet>
               <h1>{product.name}</h1>
             </ListGroup.Item>
@@ -133,6 +136,7 @@ function ProductScreen() {
           </Card>
         </Col>
       </Row>
+      
     </div>
   );
 }

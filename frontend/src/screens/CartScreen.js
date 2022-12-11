@@ -7,11 +7,11 @@ import MessageBox from '../components/MessageBox';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function CartScreen() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const {
       cart: { cartItems },
@@ -33,7 +33,7 @@ export default function CartScreen() {
     };
   
     const checkoutHandler = () => {
-      navigate('/signin?redirect=/shipping');
+      alert('\n\nYour order is noticed \n\nThanks for shopping with us');
     };
   
     return (
@@ -118,7 +118,7 @@ export default function CartScreen() {
                         onClick={checkoutHandler}
                         disabled={cartItems.length === 0}
                       >
-                        Proceed to Checkout
+                        BUY NOW
                       </Button>
                     </div>
                   </ListGroup.Item>

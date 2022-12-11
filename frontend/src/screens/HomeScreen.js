@@ -5,7 +5,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Product from "../components/Product";
 import { Helmet } from "react-helmet-async";
-
+import Loading from "../components/Loading";
+import { useNavigate } from 'react-router-dom';
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -21,8 +22,10 @@ const reducer = (state, action) => {
 
 function HomeScreen() {
   // const [Products, setProducts] = useState([]);
+  const navigate = useNavigate();
   const [data, setdata] = useState([]);
   const [currentValue, setcurrentValue] = useState("");
+  // const [refreshPage, setrefreshPage] = useState();
 
   const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
     products: [],
@@ -33,6 +36,10 @@ function HomeScreen() {
   const changeValue = (value) => {
     setcurrentValue(value);
   };
+
+//   const setrefreshPage =()=>{ 
+//     window.location.reload(); 
+// }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +63,12 @@ function HomeScreen() {
   useEffect(() => {
     let newData;
     let tempData = [...data];
+    
+    if (currentValue === "allproducts") {
+      newData = tempData;
+
+      dispatch({ type: "FETCH_SUCCESS", payload: newData });
+    }
 
     if (currentValue === "lowest") {
       newData = tempData.sort((a, b) => a.price - b.price);
@@ -99,7 +112,7 @@ function HomeScreen() {
               onChange={(event) => changeValue(event.target.value)}
               value={currentValue}
             >
-              <option>All Products</option>
+              <option value="allproducts" >All Products</option>
               <option value="lowest">price(lowest)</option>
               <option value="highest">price(highest)</option>
               <option value="a - z">a - z</option>
@@ -112,7 +125,7 @@ function HomeScreen() {
       <br />
       <div className="products">
         {loading ? (
-          <div>Loading...</div>
+          <Loading></Loading>
         ) : error ? (
           <div>{error}</div>
         ) : (
